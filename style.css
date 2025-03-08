@@ -1,0 +1,861 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, clean font */
+    background-color: #121212; /* Very dark gray */
+    color: #eee;             /* Almost white */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.container {
+    background: linear-gradient(135deg, rgba(34, 34, 34, 0.8), rgba(51, 51, 51, 0.8));
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-out, breathe 6s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+    transition: all 2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.01);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+    }
+}
+
+h1 {
+    font-size: 2.2rem; /* Larger heading */
+    margin-bottom: 20px;
+    color: #f06292; /* Pink accent color */
+    text-shadow: 0 0 10px rgba(240, 98, 146, 0.5); /* Text glow */
+    animation: pulse-glow 6s ease-in-out infinite;
+    transition: animation-duration 2s ease;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(240, 98, 146, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(240, 98, 146, 0.7);
+    }
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #bb86fc; /* Purple accent color */
+}
+
+.slider-container {
+    margin-bottom: 20px; /* More spacing */
+    position: relative; /* For absolute positioning of sparkles */
+}
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertically center label and value */
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+/* Slider Styles */
+#feelingSliderMale,
+#feelingSliderFemale {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 12px;  /* Thicker track */
+    border-radius: 6px;
+    background: linear-gradient(90deg, #444, #666); /* Gradient track */
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.2s, background 0.2s; /* Smoother transitions */
+}
+
+#feelingSliderMale::-webkit-slider-thumb,
+#feelingSliderFemale::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #a78bfa;  /* Male thumb color */
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Thumb shadow */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animate the thumb */
+}
+
+#feelingSliderFemale::-webkit-slider-thumb {
+    background: #66b2ff; /* Female thumb color */
+}
+
+#feelingSliderMale:hover,
+#feelingSliderFemale:hover {
+    opacity: 1;
+}
+
+/* Active state for sliders (when clicked/touched) */
+#feelingSliderMale:active::-webkit-slider-thumb,
+#feelingSliderFemale:active::-webkit-slider-thumb {
+    transform: scale(1.2); /* Slightly enlarge on press */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+}
+
+
+#feelingSliderMale::-moz-range-thumb,
+#feelingSliderFemale::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #a78bfa;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+     transition: transform 0.2s, box-shadow 0.2s; /* Animate the thumb */
+}
+#feelingSliderFemale::-moz-range-thumb {
+    background: #66b2ff;
+}
+
+#feelingSliderMale:active::-moz-range-thumb,
+#feelingSliderFemale:active::-moz-range-thumb {
+    transform: scale(1.2); /* Slightly enlarge on press */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+}
+
+#emojiDisplayMale,
+#emojiDisplayFemale {
+    font-size: 28px; /* Larger emojis */
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+#emojiDisplayMale:hover,
+#emojiDisplayFemale:hover {
+    transform: scale(1.2);
+}
+
+#feelingValueMale,
+#feelingValueFemale {
+    font-size: 1.25rem; /* Larger value */
+    font-weight: bold;
+}
+
+#recommendationList {
+    list-style: none;
+    padding: 0;
+}
+
+#recommendationList li {
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+    padding: 12px; /* More padding */
+    border-radius: 8px;
+    border-left: 4px solid #f06292; /* Pink border */
+    transition: background-color 0.3s, transform 0.2s; /* Hover effects */
+    text-align: left;
+}
+
+#recommendationList li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px); /* Slight horizontal movement */
+}
+
+#feelingChart {
+    width: 100%;
+    height: 250px; /* Taller chart */
+    margin-top: 30px; /* More margin */
+}
+
+button {
+    background: linear-gradient(135deg, #bb86fc, #f06292); /* Gradient button */
+    color: #fff;
+    border: none;
+    padding: 14px 20px;  /* Larger padding */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Spacing between letters */
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: block;
+    margin: 25px auto; /* More margin */
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Button shadow */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #d49bff, #f479a8); /* Lighter gradient on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+button:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Sparkle Animation (Optional, adds a kinky touch) */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none; /* Prevent clicks on sparkles */
+    animation: sparkle 2s infinite;
+}
+
+
+@keyframes sparkle {
+    0% { opacity: 0; transform: scale(0) translate(0, 0); }
+    50% { opacity: 1; transform: scale(1) translate(var(--x), var(--y)); }
+    100% { opacity: 0; transform: scale(0) translate(0, 0); }
+}
+
+/* Media Query for smaller screens (optional, but good practice) */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        width: 95%; /* Even wider on small screens */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+    #emojiDisplayMale,
+    #emojiDisplayFemale {
+        font-size: 24px;
+    }
+    #feelingValueMale,
+    #feelingValueFemale{
+        font-size: 1rem;
+    }
+}
+
+/* Record button */
+.record-button {
+    display: block;
+    margin: 15px auto;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+    width: 80%;
+    max-width: 250px;
+}
+
+.record-button:hover {
+    background: linear-gradient(to right, #ff8e8e, #ff6b6b);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+}
+
+.record-button:active {
+    transform: translateY(1px);
+}
+
+.male-section .record-button {
+    background: linear-gradient(to right, #a78bfa, #c4b5fd);
+    box-shadow: 0 4px 10px rgba(167, 139, 250, 0.3);
+}
+
+.male-section .record-button:hover {
+    background: linear-gradient(to right, #c4b5fd, #a78bfa);
+    box-shadow: 0 6px 15px rgba(167, 139, 250, 0.4);
+}
+
+.female-section .record-button {
+    background: linear-gradient(to right, #66b2ff, #99ccff);
+    box-shadow: 0 4px 10px rgba(102, 178, 255, 0.3);
+}
+
+.female-section .record-button:hover {
+    background: linear-gradient(to right, #99ccff, #66b2ff);
+    box-shadow: 0 6px 15px rgba(102, 178, 255, 0.4);
+}
+
+/* Background animations */
+.rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    z-index: 0;
+}
+
+.rain-container.active {
+    opacity: 1;
+}
+
+.raindrop {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
+    border-radius: 0 0 5px 5px;
+    animation: falling-rain linear infinite;
+}
+
+@keyframes falling-rain {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Enhanced sun animation */
+.sun {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #FDB813;
+    border-radius: 50%;
+    box-shadow: 0 0 50px 15px rgba(255, 214, 0, 0.7);
+    left: 75%;
+    top: 10%;
+    opacity: 0;
+    transition: opacity 2s ease;
+    animation: sun-rotate 60s linear infinite, sun-move 24s linear infinite;
+}
+
+.sun-ray {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 2px;
+    background: #FDB813;
+    transform-origin: left center;
+}
+
+/* Moon animation */
+.moon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #f5f5f5;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
+    left: 75%;
+    top: 10%;
+    opacity: 0;
+    transition: opacity 2s ease;
+    animation: moon-glow 8s ease-in-out infinite, moon-move 24s linear infinite;
+}
+
+/* Enhanced star styling */
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 2s ease;
+    animation: twinkle var(--twinkle-duration, 4s) ease-in-out infinite;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0));
+    transform: rotate(-45deg);
+    animation: shooting var(--shooting-duration, 2s) linear forwards;
+}
+
+/* Enhanced cloud styling */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    opacity: 0;
+    transition: opacity 2s ease;
+    animation: cloud-float var(--cloud-duration, 60s) linear infinite;
+}
+
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.cloud:before {
+    width: 50%;
+    height: 100%;
+    top: -50%;
+    left: 25%;
+}
+
+.cloud:after {
+    width: 30%;
+    height: 60%;
+    top: -30%;
+    left: 60%;
+}
+
+/* Clear button (Reset Partners) */
+.clear-button {
+    background: rgba(255, 82, 82, 0.8);
+    margin: 20px auto;
+    display: block;
+    width: 80%;
+    max-width: 250px;
+    text-align: center;
+}
+
+.clear-button:hover {
+    background: rgba(255, 82, 82, 1);
+    box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
+}
+
+/* Animation keyframes for sun and moon */
+@keyframes sun-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes sun-move {
+    0%, 100% { 
+        left: 10%; 
+        top: 70%; 
+        opacity: 0.5;
+    }
+    25% { 
+        left: 30%;
+        top: 40%; 
+        opacity: 0.8;
+    }
+    50% { 
+        left: 75%;
+        top: 10%; 
+        opacity: 1;
+    }
+    75% { 
+        left: 90%;
+        top: 40%; 
+        opacity: 0.8;
+    }
+}
+
+@keyframes moon-glow {
+    0%, 100% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3); }
+    50% { box-shadow: 0 0 30px 8px rgba(255, 255, 255, 0.5); }
+}
+
+@keyframes moon-move {
+    0%, 100% { 
+        left: 10%; 
+        top: 70%; 
+        opacity: 0.5;
+    }
+    25% { 
+        left: 30%;
+        top: 40%; 
+        opacity: 0.8;
+    }
+    50% { 
+        left: 75%;
+        top: 10%; 
+        opacity: 1;
+    }
+    75% { 
+        left: 90%;
+        top: 40%; 
+        opacity: 0.8;
+    }
+}
+
+/* Star animations */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.1; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes shooting {
+    0% {
+        transform: translateX(0) translateY(0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(var(--travel-distance)) translateY(var(--travel-distance)) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+/* Cloud animation */
+@keyframes cloud-float {
+    0% { transform: translateX(-150px); }
+    100% { transform: translateX(calc(100vw + 150px)); }
+}
+
+/* Background animation container */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* Day and night overlays */
+.day-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #87CEEB, #1E90FF);
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+.night-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+/* Improved section styling with subtle hover effects */
+.section {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced partner sections */
+.partner-section {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.male-section {
+    background: linear-gradient(to right, rgba(167, 139, 250, 0.1), rgba(196, 181, 253, 0.1));
+    border-left: 4px solid #a78bfa;
+}
+
+.female-section {
+    background: linear-gradient(to right, rgba(102, 178, 255, 0.1), rgba(153, 204, 255, 0.1));
+    border-left: 4px solid #66b2ff;
+}
+
+/* Floating animation for recommendation box */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.couple-recommendation-box {
+    animation: float 8s ease-in-out infinite;
+    transition: animation-duration 2s ease;
+}
+
+/* Improved slider styling */
+input[type="range"] {
+    height: 12px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--mood-color, rgba(186, 104, 200, 0.3)), rgba(102, 102, 102, 0.3));
+    transition: background 0.5s ease;
+}
+
+/* Improved recommendations styling */
+.recommendations ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mood-color, rgba(186, 104, 200, 0.3)) rgba(0, 0, 0, 0.1);
+    transition: scrollbar-color 0.5s ease;
+}
+
+.recommendations li {
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.recommendations li:hover {
+    transform: translateX(5px);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Kinky Neon Lights */
+.neon-light {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: neon-pulse 4s ease-in-out infinite alternate, neon-move 15s ease-in-out infinite alternate;
+}
+
+.neon-light.pink {
+    background: #ff00cc;
+    box-shadow: 0 0 40px 20px #ff00cc;
+}
+
+.neon-light.purple {
+    background: #9900ff;
+    box-shadow: 0 0 40px 20px #9900ff;
+}
+
+.neon-light.blue {
+    background: #00ccff;
+    box-shadow: 0 0 40px 20px #00ccff;
+}
+
+.neon-light.red {
+    background: #ff3366;
+    box-shadow: 0 0 40px 20px #ff3366;
+}
+
+@keyframes neon-pulse {
+    0% {
+        opacity: 0.3;
+        filter: blur(20px);
+    }
+    50% {
+        opacity: 0.6;
+        filter: blur(25px);
+    }
+    100% {
+        opacity: 0.3;
+        filter: blur(20px);
+    }
+}
+
+@keyframes neon-move {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(var(--move-x, 100px), var(--move-y, 50px));
+    }
+    50% {
+        transform: translate(var(--move-x2, -100px), var(--move-y2, 100px));
+    }
+    75% {
+        transform: translate(var(--move-x3, 50px), var(--move-y3, -50px));
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Heart-shaped neon */
+.neon-heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.neon-heart:before,
+.neon-heart:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 160%;
+    top: 0;
+    border-radius: 50%;
+    background: #ff3366;
+    box-shadow: 0 0 30px 15px #ff3366;
+    filter: blur(10px);
+}
+
+.neon-heart:before {
+    left: -50%;
+}
+
+.neon-heart:after {
+    right: -50%;
+}
+
+.neon-heart-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+    top: 85%;
+    left: 0;
+    background: #ff3366;
+    box-shadow: 0 0 30px 15px #ff3366;
+    filter: blur(10px);
+}
+
+.neon-heart.visible {
+    opacity: 0.6;
+    animation: heart-float 10s ease-in-out infinite;
+}
+
+@keyframes heart-float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(50px, -30px) rotate(10deg);
+    }
+    50% {
+        transform: translate(100px, 0) rotate(-10deg);
+    }
+    75% {
+        transform: translate(50px, 30px) rotate(5deg);
+    }
+}
+
+/* Fireworks Animation */
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+    animation: explode var(--explosion-duration, 1s) ease-out forwards;
+    opacity: 0;
+    z-index: -1;
+    transform-origin: center;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(var(--explosion-size, 20));
+        opacity: 0;
+    }
+}
+
+.firework-particle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    transform-origin: center;
+    opacity: 1;
+}
+
+@keyframes particle-animation {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x, 50px), var(--y, 50px));
+        opacity: 0;
+    }
+}
